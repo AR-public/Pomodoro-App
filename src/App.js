@@ -1,11 +1,14 @@
 import './App.css';
+import TimerComponent from './TimerComponent';
+import Navbar from './Navbar';
 
 function App() {
   return (
     <div className="App">
-
-<h1>Hello World</h1>
-
+      <Navbar />
+      <div id="TimerBackgroundBox">
+        <TimerComponent />
+      </div>
     </div>
   );
 }
