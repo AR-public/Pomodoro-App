@@ -1,6 +1,6 @@
-export default function TimerButton() {
-  return (
+export default function TimerButton({ renderStart, changeButtonState }) {
 
-    <button className="TimerButton">Start</button>
+  return (
+    <button className="TimerButton" onClick={changeButtonState} > {renderStart ? "Start" : "Pause"}</button >
   )
 }
