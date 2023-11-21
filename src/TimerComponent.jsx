@@ -33,6 +33,7 @@ export default function TimerComponent(buttonReadsStart) {
   )
 }
 
+// NEXT STEPS - UNDERSTAND HOW TO IMPLEMENT SET_INTERVAL AND UPDATE THE VALUES FOR THE DISPLAY MINUTES AND SECONDS
 
 // LOGIC OF TIMER:
 //
