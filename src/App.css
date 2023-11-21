@@ -121,7 +121,7 @@
   width: 85vw;
   margin: auto;
   margin-bottom: 50vh;
-  border-radius: 5px;
+  border-radius: 6px;
 }
 @media screen and (max-height: 400px) {
   #TimerBackgroundBox {

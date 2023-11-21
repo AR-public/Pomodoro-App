@@ -4,13 +4,13 @@ import TimerButton from "./TimerButton"
 
 export default function TimerBackgroundBox() {
 
-  const [buttonState, setButtonState] = useState(true)
-  function changeButtonState() { setButtonState(!buttonState) }
+  const [buttonReadsStart, setButtonReadsStart] = useState(true)
+  function changeButtonState() { setButtonReadsStart(!buttonReadsStart) }
 
   return (
     <div id="TimerBackgroundBox" >
-      <TimerComponent />
-      <TimerButton renderStart={buttonState} changeButtonState={changeButtonState} />
+      <TimerComponent buttonReadsStart={buttonReadsStart} />
+      <TimerButton buttonReadsStart={buttonReadsStart} changeButtonState={changeButtonState} />
     </div>
   )
 }
