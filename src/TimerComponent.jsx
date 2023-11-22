@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function TimerComponent(buttonReadsStart) {
 
@@ -12,27 +12,33 @@ export default function TimerComponent(buttonReadsStart) {
   let [totalSecondsRemaining, setTotalSecondsRemaining] = useState(startingNumberofSeconds)
   let [totalMilisecondsRemaining, setTotalMilisecondsRemaining] = useState(startingNumberofMiliseconds)
 
-  // Watch value of buttonReadsStart
-
-  function countdown() { setInterval(() => setTotalMilisecondsRemaining(totalMilisecondsRemaining--), 1000) }
+  // Start/stop countdown when the start/pause button is pressed
+  function countdown() { setInterval(setTotalMilisecondsRemaining(totalMilisecondsRemaining--), 1000) }
   function stopCountdown() { clearInterval(countdown) }
 
   useEffect(() => {
-    buttonReadsStart ? countdown() : stopCountdown()
+    buttonReadsStart ? stopCountdown() : countdown()
+    setInterval(console.log(totalMilisecondsRemaining), 1000)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [buttonReadsStart]);
 
-  // Calculate Variables 
-  setTotalMinutesRemaining(Math.floor())
-  setTotalSecondsRemaining()
-  setTotalMilisecondsRemaining()
+  // Calculate Minute/Seconds 
+  function recalculateMinutesToDisplay() { setTotalMinutesRemaining(Math.floor(totalMilisecondsRemaining / 60000)) }
+  function recalculateSecondsToDisplay() { setTotalSecondsRemaining(Math.floor(totalMilisecondsRemaining / 1000)) }
 
+  useEffect(() => {
+    recalculateMinutesToDisplay()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, totalMilisecondsRemaining);
+
+  useEffect(() => {
+    recalculateSecondsToDisplay()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, totalMilisecondsRemaining);
 
   // Pad display digits to always show two numbers
-  let numberOfSecondsRemainingToDisplay = String(totalSecondsRemaining).padStart(2, '0')
   let numberOfMinutesRemainingToDisplay = String(totalMinutesRemaining).padStart(2, '0')
-
-
-  // useEffect() runs when anything in the DOM re-renders
+  let numberOfSecondsRemainingToDisplay = String(totalSecondsRemaining).padStart(2, '0')
 
 
   return (
