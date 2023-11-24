@@ -13,18 +13,30 @@ export default function TimerComponent({ buttonReadsStart }) {
   let [totalMilisecondsRemaining, setTotalMilisecondsRemaining] = useState(startingNumberofMiliseconds)
 
   // Start/stop countdown when the start/pause button is pressed
-  function countdown() {
-    setInterval(() => {
-      setTotalMilisecondsRemaining(totalMilisecondsRemaining = totalMilisecondsRemaining - 1000);
+  const countdown = () => {
+    const intervalId = setInterval(() => {
+      setTotalMilisecondsRemaining((prev) => prev - 1000);
     }, 1000);
-  }
+    return intervalId; // Return the interval ID
+  };
 
-  function stopCountdown() {
-    clearInterval(countdown);
-  }
+  const stopCountdown = (intervalId) => {
+    clearInterval(intervalId);
+  };
 
   useEffect(() => {
-    buttonReadsStart ? stopCountdown() : countdown();
+    let intervalId;
+    if (!buttonReadsStart) {
+      intervalId = countdown();
+    } else {
+      // Stop the countdown when buttonReadsStart is true
+      stopCountdown(intervalId);
+    }
+
+    // Cleanup function to clear the interval when the component unmounts or when buttonReadsStart changes
+    return () => {
+      stopCountdown(intervalId);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [buttonReadsStart]);
 
