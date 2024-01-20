@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 
 export default function TimerComponent({ buttonReadsStart }) {
 
@@ -37,27 +37,26 @@ export default function TimerComponent({ buttonReadsStart }) {
     return () => {
       stopCountdown(intervalId);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [buttonReadsStart]);
 
-  // Calculate Minute/Seconds 
-  function recalculateMinutesToDisplay() {
-    setTotalMinutesRemaining(Math.floor(totalMilisecondsRemaining / 60000));
-  }
 
-  function recalculateSecondsToDisplay() {
+  const recalculateMinutesToDisplay = useCallback(() => {
+    setTotalMinutesRemaining(Math.floor(totalMilisecondsRemaining / 60000));
+  }, [totalMilisecondsRemaining])
+
+  const recalculateSecondsToDisplay = useCallback(() => {
     setTotalSecondsRemaining(Math.floor((totalMilisecondsRemaining % 60000) / 1000));
-  }
+  }, [totalMilisecondsRemaining])
+
 
   useEffect(() => {
     recalculateMinutesToDisplay();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [totalMilisecondsRemaining]);
+  }, [recalculateMinutesToDisplay, totalMilisecondsRemaining]);
 
   useEffect(() => {
     recalculateSecondsToDisplay();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [totalMilisecondsRemaining]);
+  }, [recalculateSecondsToDisplay, totalMilisecondsRemaining]);
+
 
   // Pad display digits to always show two numbers
   let numberOfMinutesRemainingToDisplay = String(totalMinutesRemaining).padStart(2, '0')
