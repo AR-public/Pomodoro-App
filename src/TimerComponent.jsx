@@ -11,6 +11,7 @@ export default function TimerComponent({ buttonReadsStart }) {
   let [totalMinutesRemaining, setTotalMinutesRemaining] = useState(startingNumberofMinutes)
   let [totalSecondsRemaining, setTotalSecondsRemaining] = useState(startingNumberofSeconds)
   let [totalMilisecondsRemaining, setTotalMilisecondsRemaining] = useState(startingNumberofMiliseconds)
+  let isTimerZero: boolean = false
 
   // Start/stop countdown when the start/pause button is pressed
   const countdown = () => {

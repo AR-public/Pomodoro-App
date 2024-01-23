@@ -2,13 +2,15 @@
   "name": "myapp",
   "version": "1.0.0",
   "description": "1",
-  "main": "1.0.0",
+  "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.18.2"
   }
 }
