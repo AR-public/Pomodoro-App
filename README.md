@@ -1,3 +1,10 @@
+This is a re-creation of the famous https://pomofocus.io/ pomodoro timer.
+
+![image](https://github.com/user-attachments/assets/a24b474b-8aa6-42c3-a67d-905335d88de0)
+
+This was a challenge to create a productivity timer from scratch using the basic principles of React
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
